@@ -1,6 +1,8 @@
 import './App.css';
 import {useState, useEffect, useRef} from 'react'
 import {getNextGeneration} from "./game-logic";
+import {testGame} from "./test-game";
+
 
 //Shamelessly stolen
 function useInterval(callback, delay) {
@@ -24,27 +26,16 @@ function useInterval(callback, delay) {
     }, [delay]);
 }
 
-const initialGameState = {
-    "id": "abc123",
-    "generationCount": 5,
-    "size": 5,
-    "world": [
-        [0, 1, 0, 0, 0],
-        [1, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]]
-}
 
 function GameBoard({gameState}) {
     const {world} = gameState;
-    const cellStyle = {width: '30px', height: '30px', color: 'blue', border: 'solid'}
+    const cellStyle = {width: '10px', height: '10px', color: 'blue', border: 'solid'}
     return <div>
         {
             world.map(row => {
                 return (<div style={{display: 'flex'}}>
                     {row.map(column => {
-                        return <div style={cellStyle}>{column}</div>
+                        return <div style={{...cellStyle, backgroundColor: column? 'blue': 'white'}}/>
                     })}
                 </div>)
             })
@@ -53,8 +44,8 @@ function GameBoard({gameState}) {
 }
 
 function App() {
-    const [delay, setDelay] = useState(1000);
-    const [gameState, setGameState] = useState(initialGameState)
+    const [delay, setDelay] = useState(30000);
+    const [gameState, setGameState] = useState(testGame)
 
     useInterval(() => {
         console.log('evaluating next state')

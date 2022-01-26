@@ -1,4 +1,4 @@
-const shouldLog = true;
+const shouldLog = false;
 
 const log = (string) => {
     if(shouldLog){
@@ -37,7 +37,7 @@ const getNeighbors = function getNeighbors(world, row, column){
     log('has bottom:', !!bottom)
     log('has bottomLeft:', !!bottomLeft)
     const totalNeighbors = left + topLeft + top + topRight + right + bottomRight + bottom + bottomLeft;
-    console.log(`[${row},${column}]: ${totalNeighbors}`)
+    log(`[${row},${column}]: ${totalNeighbors}`)
     return totalNeighbors;
 }
 
@@ -63,15 +63,6 @@ const updateWorld = function updateWorld(world){
 // 2: will die
 // 3: will live/create
 
-// let world =
-//     [
-//         [0,0,0,0,0],
-//         [1,1,1,0,0],
-//         [0,0,0,0,0],
-//         [0,0,0,0,0],
-//         [0,0,0,0,0]
-//     ]
-
 const getNextGeneration = function getNextGeneration({world}){
     for(let i = 0; i<5;i++){
         for(let j =0; j< 5;j++){
@@ -96,7 +87,7 @@ const getNextGeneration = function getNextGeneration({world}){
             // printGame(world)
         }
     }
-    printGame(world)
+    // printGame(world)
     updateWorld(world)
     return world;
 }
