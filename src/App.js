@@ -32,10 +32,10 @@ function GameBoard({gameState}) {
     const cellStyle = {width: '10px', height: '10px', color: 'blue', border: 'solid'}
     return <div>
         {
-            world.map(row => {
-                return (<div style={{display: 'flex'}}>
-                    {row.map(column => {
-                        return <div style={{...cellStyle, backgroundColor: column? 'blue': 'white'}}/>
+            world.map((row, rowIndex) => {
+                return (<div key={rowIndex}style={{display: 'flex'}}>
+                    {row.map((column, columnIndex) => {
+                        return <div key={`${rowIndex}${columnIndex}`} style={{...cellStyle, backgroundColor: column? 'blue': ''}}/>
                     })}
                 </div>)
             })
@@ -44,7 +44,7 @@ function GameBoard({gameState}) {
 }
 
 function App() {
-    const [delay, setDelay] = useState(30000);
+    const [delay, setDelay] = useState(1000);
     const [gameState, setGameState] = useState(testGame)
 
     useInterval(() => {
