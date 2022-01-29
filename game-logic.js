@@ -1,4 +1,3 @@
-import structuredClone from '@ungap/structured-clone';
 const shouldLog = false;
 
 const log = (string) => {
@@ -65,23 +64,22 @@ const updateWorld = function updateWorld(world){
 // 3: will live/create
 
 const getNextGeneration = function getNextGeneration({world}){
-    let localWorld = structuredClone(world)
-    for(let i = 0; i< localWorld.length; i++){
-        for(let j =0; j< localWorld.length; j++){
+    for(let i = 0; i< world.length;i++){
+        for(let j =0; j< world.length;j++){
             log('checking:', i, ',', j)
-            const neighbors =  getNeighbors(localWorld, i,j)
-            const cellAlive = localWorld[i][j];
+            const neighbors =  getNeighbors(world, i,j)
+            const cellAlive = world[i][j];
             if(cellAlive){
                 if(neighbors < 2 || neighbors > 3){
                     log(`[${i},${j}]:alive, has ${neighbors} and will die`)
-                    localWorld[i][j] = 2
+                    world[i][j] = 2
                 }else{
                     log(`[${i},${j}]:alive, has ${neighbors} and will survive`)
                 }
             }else {
                 if(neighbors === 3) {
                     log(`[${i},${j}]:dead, has ${neighbors} and will create`)
-                    localWorld[i][j] = 3; //create cell
+                    world[i][j] = 3; //create cell
                 }else {
                     log(`[${i},${j}]:dead, has ${neighbors} and will stay dead`)
                 }
@@ -90,10 +88,10 @@ const getNextGeneration = function getNextGeneration({world}){
         }
     }
     // printGame(world)
-    updateWorld(localWorld)
-    return localWorld;
+    updateWorld(world)
+    return world;
 }
 
-export {
+module.exports = {
     getNextGeneration
 }
