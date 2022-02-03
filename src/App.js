@@ -35,7 +35,9 @@ function GameBoard({gameState}) {
             world.map((row, rowIndex) => {
                 return (<div className={'gameBoardRow'} key={rowIndex}>
                     {row.map((column, columnIndex) => {
-                        return <div className={'gameBoardCell'} key={`${rowIndex}${columnIndex}`} style={{backgroundColor: column? 'blue': ''}}/>
+                        return <div className={'gameBoardCell'} key={`${rowIndex}${columnIndex}`}>
+                            {!!column && <img className={'gameBoardCell'} src="/gain-logo.png" alt="image" />}
+                        </div>
                     })}
                 </div>)
             })

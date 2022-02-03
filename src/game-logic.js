@@ -37,7 +37,7 @@ const getNeighbors = function getNeighbors(world, row, column){
     log('has bottomRight:', !!bottomRight)
     log('has bottom:', !!bottom)
     log('has bottomLeft:', !!bottomLeft)
-    const totalNeighbors = left + topLeft + top + topRight + right + bottomRight + bottom + bottomLeft;
+    const totalNeighbors = left + topLeft + top + topRight + right + bottomRight + bottom + bottomLeft;  // Type coercion FTW. true + true = 2
     log(`[${row},${column}]: ${totalNeighbors}`)
     return totalNeighbors;
 }
